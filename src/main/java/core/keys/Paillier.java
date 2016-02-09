@@ -12,9 +12,9 @@ public class Paillier {
         BigInteger n = p.multiply(q);
         BigInteger publicKey = n;
 
-        //phi = (p + 1)(q + 1)
-        BigInteger pun = p.add(BigInteger.ONE);
-        BigInteger qun = q.add(BigInteger.ONE);
+        //phi = (p - 1)(q - 1)
+        BigInteger pun = p.subtract(BigInteger.ONE);
+        BigInteger qun = q.subtract(BigInteger.ONE);
         BigInteger phi = pun.multiply(qun);
 
         BigInteger secretKey = phi;
@@ -45,14 +45,19 @@ public class Paillier {
         //if (messageToDecrypt.compareTo(BigInteger.ZERO) < 0 || messageToDecrypt.compareTo(nsquare) >= 0 || messageToDecrypt.gcd(nsquare).intValue() != 1)
         //    throw new Exception("Paillier.decrypt : c is not in Z*_{n^2}");
 
-        //lu
-        BigInteger lu = publicKey.modPow(secretKey, nsquare);
-        lu = lu.subtract(BigInteger.ONE).divide(publicKey);
+        // g = n + 1
+        BigInteger g = publicKey.add(BigInteger.ONE);
 
-        // mu
-        BigInteger mu = secretKey.modPow(BigInteger.ONE.negate(), publicKey);
+        // mu = (phi ^ -1) mod n
+        BigInteger mu = secretKey.modInverse(publicKey);
 
-        BigInteger result = (lu.multiply(mu)).mod(publicKey);
+        // inter = (c ^ phi) mod nsqare
+        BigInteger inter = messageToDecrypt.modPow(secretKey, nsquare);
+        // inter = (inter - 1) / n
+        inter = inter.subtract(BigInteger.ONE).divide(publicKey);
+
+        // result = (inter * mu) mod n
+        BigInteger result = inter.multiply(mu).mod(publicKey);
 
         return result;
     }

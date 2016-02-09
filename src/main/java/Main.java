@@ -27,7 +27,7 @@ public class Main {
             System.out.println("Encryption de 5 : " + X);
             ArrayList<BigInteger> Mx = alice.maskResponses(X, bob.getPublicKey());
             System.out.println("Encryption des masques : " + Mx);
-            BigInteger x = bob.decryptMessage(Mx.get(5));
+            BigInteger x = bob.decryptMessage(Mx.get(4));
             System.out.println("Décryptage du masque : " + x);
             System.out.println("===== Fin échange =====");
         } catch (Exception e) {

@@ -15,19 +15,20 @@ public class Masker{
 
     public ArrayList<BigInteger> maskResponses (BigInteger I, BigInteger publicKey) throws Exception {
         ArrayList<BigInteger> result = new ArrayList<>();
-        for (int i = 1; i <= responses.size(); i++) {
-            result.add(maskResponse(I, i, publicKey));
+        for (int i = 0; i < responses.size(); i++) {
+            result.add(maskResponse(I, BigInteger.valueOf(i + 1), responses.get(i), publicKey));
         }
         return result;
     }
 
-    private BigInteger maskResponse(BigInteger I, int i, BigInteger publicKey) throws Exception {
+    public BigInteger maskResponse(BigInteger encryptNumberOfQuestion, BigInteger indexToMask,
+                                   BigInteger responseToMask, BigInteger publicKey) throws Exception {
         BigInteger r = new BigInteger(64,new Random()).mod(publicKey);
         BigInteger nsquare = publicKey.multiply(publicKey);
 
-        BigInteger encryptI = Paillier.encrypt(BigInteger.valueOf(-i), publicKey);
-        BigInteger mask = (I.multiply(encryptI)).modPow(r, nsquare);
-
+        BigInteger encryptI = Paillier.encrypt(publicKey.subtract(indexToMask), publicKey);
+        BigInteger mask = (encryptNumberOfQuestion.multiply(encryptI)).modPow(r, nsquare);
+        mask = mask.multiply(Paillier.encrypt(responseToMask,publicKey));
         return mask;
     }
 }
