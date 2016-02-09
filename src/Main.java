@@ -1,29 +1,39 @@
+import core.agents.Masker;
+import core.agents.Paillier;
+
 import java.math.BigInteger;
-import java.util.Random;
+import java.util.ArrayList;
+
 
 /**
  * @author Dimitri RODARIE on 08/02/2016.
  * @version 1.0
  */
 public class Main {
+
     public static void main(String[] args) {
-        BigInteger p = generatePrimal(64),
-                q = generatePrimal(64),
-                n = p.multiply(q),
-                phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)),
-                x = new BigInteger(64,new Random()).mod(n),
-                r = new BigInteger(64, new Random()).mod(n);
+        ArrayList<BigInteger> responses = new ArrayList<>();
+        //Pour faire simple on va dire que les réponses sont 1, 2, 3 jusqu'à 10
+        for (int i = 0; i < 10; i++) {
+            responses.add(BigInteger.valueOf(i));
+        }
+
+        Paillier bob = new Paillier();
+        Masker alice = new Masker(responses,bob.publicKey);
+
+        try {
+            System.out.println("===== Début échange =====");
+            BigInteger X = bob.encrypt(BigInteger.valueOf(5));
+            System.out.println("Encryption de 5 : " + X);
+            ArrayList<BigInteger> Mx = alice.maskResponses(X);
+            System.out.println("Encryption des masques : " + Mx);
+            BigInteger x = bob.decrypt(Mx.get(5));
+            System.out.println("Décryptage du masque : " + x);
+            System.out.println("===== Fin échange =====");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public static boolean isPrimalFermat (BigInteger p){
-        return BigInteger.valueOf(2).modPow(p.subtract(BigInteger.ONE),p).equals(BigInteger.ONE);
-    }
 
-    public static BigInteger generatePrimal (int nbBits){
-        BigInteger result;
-        do {
-            result = new BigInteger(nbBits,new Random());
-        }while (!isPrimalFermat(result));
-        return result;
-    }
 }
