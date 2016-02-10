@@ -6,10 +6,10 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Masker{
+public class Alice {
     private ArrayList<BigInteger> responses;
 
-    public Masker(ArrayList<BigInteger> responses, BigInteger publicKey){
+    public Alice(ArrayList<BigInteger> responses, BigInteger publicKey){
         this.responses = responses;
     }
 
