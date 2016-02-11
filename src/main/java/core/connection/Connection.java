@@ -6,13 +6,13 @@ import javax.net.SocketFactory;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
-import java.net.Inet4Address;
-import java.net.InetAddress;
+import java.net.*;
 
 public class Connection {
-    private static final int TIMEOUT = 5;
+    private static final int TIMEOUT = 60;
 
-    private SSLSocket socket;
+    private Socket socket;
+    private ServerSocket serverSocket;
     private BufferedOutputStream out;
     private BufferedInputStream in;
 
@@ -31,26 +31,35 @@ public class Connection {
     public Connection() {
     }
 
-    public Connection(InetAddress address, int port){
-        this.serverDestAddress=address;
-        this.port=port;
+    public Connection(InetAddress address, int port) {
+        this.serverDestAddress = address;
+        this.port = port;
+    }
+
+    public void createServer() throws IOException {
+        System.out.println("OPENING CONNECTION  to " + serverDestAddress + " ... ...");
+        ServerSocket serverSocket = new ServerSocket(1500);
+        serverSocket.setSoTimeout(this.TIMEOUT * 1000);
+        this.serverSocket = serverSocket;
+        this.socket = serverSocket.accept();
+        this.out = new BufferedOutputStream(this.socket.getOutputStream());
+        this.in = new BufferedInputStream(this.socket.getInputStream());
+        System.out.println("Sever opened ... ...");
     }
 
     public void createConnection() throws IOException {
-        System.out.println("OPENING CONNECTION  to "+serverDestAddress+" ... ...");
-        SocketFactory factory = SSLSocketFactory.getDefault();
-        this.socket = (SSLSocket) factory.createSocket(serverDestAddress, port);
-        this.socket.setSoTimeout(this.TIMEOUT * 1000);
-        String[] suites = {"SSL_DH_anon_WITH_RC4_128_MD5"};
-        this.socket.setEnabledCipherSuites(suites);
+        System.out.println("OPENING CONNECTION  to " + serverDestAddress + " ... ...");
+        Socket socket = new Socket(serverDestAddress, 1500);
+        socket.setSoTimeout(this.TIMEOUT * 1000);
+        this.socket = socket;
         this.out = new BufferedOutputStream(this.socket.getOutputStream());
         this.in = new BufferedInputStream(this.socket.getInputStream());
         System.out.println("Connection opened ... ...");
     }
 
     private void sendMessage(String messageToSend) throws IOException {
-            this.out.write(messageToSend.getBytes());
-            this.out.flush();
+        this.out.write(messageToSend.getBytes());
+        this.out.flush();
     }
 
     private String waitForResponse() throws IOException {
@@ -75,7 +84,6 @@ public class Connection {
                 runConnection = false;
             }
         }
-        closeConnection();
         return response;
     }
 
@@ -93,10 +101,9 @@ public class Connection {
                 runConnection = false;
             }
         }
-        closeConnection();
     }
 
-    private void closeConnection(){
+    public void closeConnection() {
         try {
             System.out.println("CLOSING CONNECTION ... ...");
             in.close();
@@ -105,6 +112,14 @@ public class Connection {
             System.out.println("CONNECTION CLOSED");
         } catch (IOException e) {
             System.out.println("Can't close streams\n" + e.getMessage());
+        }
+    }
+
+    public void closeServer(){
+        try {
+            this.serverSocket.close();
+        } catch (IOException e) {
+            System.out.println("Can't close server");
         }
     }
 }

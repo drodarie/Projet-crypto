@@ -6,7 +6,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Alice {
+public class Alice implements ProcessResponse{
     private ArrayList<BigInteger> responses;
 
     public Alice(ArrayList<BigInteger> responses, BigInteger publicKey){
@@ -30,5 +30,29 @@ public class Alice {
         BigInteger mask = (encryptNumberOfQuestion.multiply(encryptI)).modPow(r, nsquare);
         mask = mask.multiply(Paillier.encrypt(responseToMask,publicKey));
         return mask;
+    }
+
+    //Trnasformer la réponse qui arrive sous forme de strings en une réponse à renvoyer sous forme de string
+    @Override
+    public String process(String messageToRespond) {
+        try {
+            System.out.println("Message from Bob : " + messageToRespond);
+            String[] message = messageToRespond.split(" ");
+            BigInteger publicKey = new BigInteger(message[0]);
+            BigInteger I = new BigInteger(message[1]);
+            ArrayList<BigInteger> response = maskResponses(I, publicKey);
+            StringBuilder responseToBuild = new StringBuilder("");
+            for (int i = 0; i < response.size(); i++) {
+                responseToBuild.append(response.get(i).toString());
+                responseToBuild.append(" ");
+            }
+
+            System.out.println("Response to send : " + responseToBuild.toString());
+            return responseToBuild.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
