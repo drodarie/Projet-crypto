@@ -114,7 +114,7 @@
           <text value="En attente de Bob..."/>
         </properties>
       </component>
-      <component id="69b6" class="javax.swing.JTextField" binding="a195cmTextField" default-binding="true">
+      <component id="69b6" class="javax.swing.JTextField" binding="textField2">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -124,7 +124,7 @@
           <text value="195cm"/>
         </properties>
       </component>
-      <component id="86eef" class="javax.swing.JTextField" binding="a22AnsTextField" default-binding="true">
+      <component id="86eef" class="javax.swing.JTextField" binding="textField3">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -134,7 +134,7 @@
           <text value="22 ans "/>
         </properties>
       </component>
-      <component id="c6a89" class="javax.swing.JTextField" binding="brunTextField" default-binding="true">
+      <component id="c6a89" class="javax.swing.JTextField" binding="textField4">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -144,7 +144,7 @@
           <text value="Brun"/>
         </properties>
       </component>
-      <component id="af955" class="javax.swing.JTextField" binding="etudiantTextField" default-binding="true">
+      <component id="af955" class="javax.swing.JTextField" binding="textField5">
         <constraints>
           <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -154,7 +154,7 @@
           <text value="Etudiant"/>
         </properties>
       </component>
-      <component id="a3516" class="javax.swing.JTextField" binding="capricorneTextField" default-binding="true">
+      <component id="a3516" class="javax.swing.JTextField" binding="textField6">
         <constraints>
           <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -164,7 +164,7 @@
           <text value="Capricorne"/>
         </properties>
       </component>
-      <component id="41a5" class="javax.swing.JTextField" binding="a0TextField" default-binding="true">
+      <component id="41a5" class="javax.swing.JTextField" binding="textField7">
         <constraints>
           <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -174,7 +174,7 @@
           <text value="0"/>
         </properties>
       </component>
-      <component id="26537" class="javax.swing.JTextField" binding="ouiTextField" default-binding="true">
+      <component id="26537" class="javax.swing.JTextField" binding="textField8">
         <constraints>
           <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -184,7 +184,7 @@
           <text value="Oui"/>
         </properties>
       </component>
-      <component id="db9e6" class="javax.swing.JTextField" binding="aucunDesDeuxViveTextField" default-binding="true">
+      <component id="db9e6" class="javax.swing.JTextField" binding="textField9">
         <constraints>
           <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -194,7 +194,7 @@
           <text value="Aucun des deux, vive Darwin"/>
         </properties>
       </component>
-      <component id="90ce7" class="javax.swing.JTextField" binding="bananaTextField" default-binding="true">
+      <component id="90ce7" class="javax.swing.JTextField" binding="textField10">
         <constraints>
           <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>

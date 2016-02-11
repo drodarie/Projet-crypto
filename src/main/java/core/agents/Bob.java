@@ -37,6 +37,6 @@ public class Bob {
         System.out.println("Response from Alice : " + response);
         String[] responses = response.split(" ");
         BigInteger responseDecrypted = decryptMessage(new BigInteger(responses[numQuestion - 1]));
-        return responseDecrypted.toString();
+        return new String(responseDecrypted.toByteArray());
     }
 }

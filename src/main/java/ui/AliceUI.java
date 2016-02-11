@@ -8,9 +8,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 /**
  * Created by Pierre on 10/02/2016.
@@ -18,15 +20,15 @@ import java.net.UnknownHostException;
 public class AliceUI extends JFrame{
     private JTextField textField1;
     private JButton enAttenteDeBobButton;
-    private JTextField a195cmTextField;
-    private JTextField a22AnsTextField;
-    private JTextField brunTextField;
-    private JTextField etudiantTextField;
-    private JTextField capricorneTextField;
-    private JTextField a0TextField;
-    private JTextField ouiTextField;
-    private JTextField aucunDesDeuxViveTextField;
-    private JTextField bananaTextField;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JTextField textField5;
+    private JTextField textField6;
+    private JTextField textField7;
+    private JTextField textField8;
+    private JTextField textField9;
+    private JTextField textField10;
     private JPanel mainPanel;
 
     private Alice alice;
@@ -46,6 +48,22 @@ public class AliceUI extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
+                    ArrayList<BigInteger> responses = new ArrayList<BigInteger>();
+                    responses.add(new BigInteger(textField1.getText().getBytes()));
+                    responses.add(new BigInteger(textField2.getText().getBytes()));
+                    responses.add(new BigInteger(textField3.getText().getBytes()));
+                    responses.add(new BigInteger(textField4.getText().getBytes()));
+                    responses.add(new BigInteger(textField5.getText().getBytes()));
+                    responses.add(new BigInteger(textField6.getText().getBytes()));
+                    responses.add(new BigInteger(textField7.getText().getBytes()));
+                    responses.add(new BigInteger(textField8.getText().getBytes()));
+                    responses.add(new BigInteger(textField9.getText().getBytes()));
+                    responses.add(new BigInteger(textField10.getText().getBytes()));
+
+                    System.out.println(textField1.getText().getBytes());
+
+                    alice.setResponses(responses);
+
                     Connection connection = new Connection(Inet4Address.getByName("localhost"), 1500);
                     connection.createServer();
                     connection.waitAndSend(alice);

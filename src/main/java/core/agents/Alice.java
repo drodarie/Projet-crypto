@@ -32,6 +32,10 @@ public class Alice implements ProcessResponse{
         return mask;
     }
 
+    public void setResponses(ArrayList<BigInteger> responses) {
+        this.responses = responses;
+    }
+
     //Trnasformer la réponse qui arrive sous forme de strings en une réponse à renvoyer sous forme de string
     @Override
     public String process(String messageToRespond) {
