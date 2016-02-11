@@ -29,14 +29,14 @@ public class Bob {
     public String createMessageToSend(int numQuestion) throws Exception {
         this.numQuestion = numQuestion;
         BigInteger encodedQuestion = Paillier.encrypt(BigInteger.valueOf(numQuestion), getPublicKey());
-        String result = getPublicKey().toString() + " " + numQuestion;
+        String result = getPublicKey().toString() + " " + encodedQuestion;
         return result;
     }
 
     public String decodeResponse(String response) throws Exception {
         System.out.println("Response from Alice : " + response);
         String[] responses = response.split(" ");
-        BigInteger responseDecrypted = decryptMessage(new BigInteger(responses[numQuestion]));
+        BigInteger responseDecrypted = decryptMessage(new BigInteger(responses[numQuestion - 1]));
         return responseDecrypted.toString();
     }
 }
